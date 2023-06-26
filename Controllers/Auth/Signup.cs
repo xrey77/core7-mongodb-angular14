@@ -6,6 +6,7 @@ using core7_mongodb_angular14.Entities;
 
 namespace core7_mongodb_angular14.Controllers.Auth
 {
+    [ApiExplorerSettings(GroupName = "Sign-up or Account Registration")]
     [ApiController]
     [Route("[controller]")]
     public class Signup: ControllerBase 

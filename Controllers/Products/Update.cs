@@ -7,6 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace core7_mongodb_angular14.Controllers.Products
 {
+    [ApiExplorerSettings(GroupName = "Update Product")]
     [ApiController]
     [Route("[controller]")]
     public class Update : ControllerBase {

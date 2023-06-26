@@ -10,6 +10,7 @@ using System.Security.Claims;
 
 namespace core7_mongodb_angular14.Controllers.Auth
 {
+    [ApiExplorerSettings(GroupName = "Sign-in to User Account")]
     [ApiController]
     [Route("[controller]")]
     public class Signin : ControllerBase 

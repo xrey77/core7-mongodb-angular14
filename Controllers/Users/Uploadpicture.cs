@@ -5,8 +5,9 @@ using Microsoft.Extensions.Options;
 
 namespace core7_mongodb_angular14.Controllers.Users
 {
+    [ApiExplorerSettings(GroupName = "Upload User Image")]
     [ApiController]
-    [Route("[controller]")]    
+    [Route("[controller]")]
     public class Uploadpicture : ControllerBase {
 
         private readonly IUserService _usersService;

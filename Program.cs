@@ -2,9 +2,11 @@ using System.Text;
 using core7_mongodb_angular14.Entities;
 using core7_mongodb_angular14.Models;
 using core7_mongodb_angular14.Services;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection(nameof(MongoDBSettings)));
@@ -15,8 +17,27 @@ builder.Services.AddSingleton<MongoDBContext>(serviceProvider =>
 });
 // builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection(nameof(MongoDBSettings)));
 builder.Services.AddControllers();
-builder.Services.AddSwaggerGen();
 builder.Services.AddSpaStaticFiles(options => { options.RootPath = "clientapp/dist"; });
+builder.Services.AddSwaggerGen(c =>
+    {
+        c.SwaggerDoc("v1", new OpenApiInfo { Title = "QATAR FOUNDATION", Description="Rest API Documentation", Version = "v1" });
+        c.TagActionsBy(api =>
+            {
+                if (api.GroupName != null)
+                {
+                    return new[] { api.GroupName };
+                }
+
+                var controllerActionDescriptor = api.ActionDescriptor as ControllerActionDescriptor;
+                if (controllerActionDescriptor != null)
+                {
+                    return new[] { controllerActionDescriptor.ControllerName };
+                }
+
+                throw new InvalidOperationException("Unable to determine tag for endpoint.");
+            });
+        c.DocInclusionPredicate((name, api) => true);        
+    });
 builder.Services.AddRazorPages();
 
 // ============VALIDATE IF JWT TOKEN HAS BEEN GENERATED===================================
@@ -52,10 +73,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
-    // app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProductsAPI v1"));
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "");
+    });    
     app.UseHsts();
-    app.UseDeveloperExceptionPage();
 }
 
 // ==========VALIDATE IF END POINT IS AUTHORIZED================
@@ -78,7 +100,7 @@ app.UseStatusCodePages(async context =>
     });
 //============================================================
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 app.UseRouting();
 app.UseSpaStaticFiles();
 app.UseAuthorization();

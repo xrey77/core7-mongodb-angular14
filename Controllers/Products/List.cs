@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace core7_mongodb_angular14.Controllers.Products
 {
+    [ApiExplorerSettings(GroupName = "List All Products")]
     [ApiController]
     [Route("[controller]")]
     public class List : ControllerBase {

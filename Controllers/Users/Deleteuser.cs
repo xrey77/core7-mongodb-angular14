@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace core7_mongodb_angular14.Controllers.Users
 {
+    [ApiExplorerSettings(GroupName = "Delete User")]
     [Authorize]
     [ApiController]
     [Route("[controller]")]

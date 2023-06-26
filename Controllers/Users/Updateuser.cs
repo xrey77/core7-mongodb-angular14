@@ -9,9 +9,10 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace core7_mongodb_angular14.Controllers.Users
 {
-    [Authorize]
+    [ApiExplorerSettings(GroupName = "Update User")]
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class Updateuser : ControllerBase {
         private readonly IUserService _usersService;
         private readonly ILogger<Updateuser> _logger;

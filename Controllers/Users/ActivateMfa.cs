@@ -5,9 +5,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Google.Authenticator;
 using core7_mongodb_angular14.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace core7_mongodb_angular14.Controllers.Users
 {
+    [ApiExplorerSettings(GroupName = "Enable or Disable 2-Factor Authentication")]
+    [ApiController]
+    [Route("[controller]")]
+    [Authorize]
     public class ActivateMfa : ControllerBase {
 
         private readonly IUserService _usersService;

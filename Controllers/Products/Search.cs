@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace core7_mongodb_angular14.Controllers.Products
 {
+    [ApiExplorerSettings(GroupName = "Search Product Description")]
     [ApiController]
     [Route("[controller]")]
     public class Search : ControllerBase {

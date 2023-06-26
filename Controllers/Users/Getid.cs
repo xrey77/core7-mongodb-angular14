@@ -7,9 +7,10 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace core7_mongodb_angular14.Users
 {
-    [Authorize]    
+    [ApiExplorerSettings(GroupName = "Retrieve User ID")]
     [ApiController]
     [Route("[controller]")]
+    [Authorize]    
     public class Getid : ControllerBase 
     {
         private readonly IUserService _usersService;
